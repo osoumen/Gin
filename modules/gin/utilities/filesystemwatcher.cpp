@@ -79,10 +79,11 @@ public:
 
     ~Impl()
     {
+        signalThreadShouldExit ();
         inotify_rm_watch (fd, wd);
         close (fd);
 
-        stopThread (1000);
+        waitForThreadToExit (1000);
     }
 
     void run() override
@@ -93,7 +94,7 @@ public:
         {
             int numRead = read (fd, buf, BUF_LEN);
 
-            if (numRead == -1 || threadShouldExit())
+            if (numRead <= 0 || threadShouldExit())
                 break;
 
             triggerAsyncUpdate();
