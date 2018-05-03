@@ -195,7 +195,7 @@ void FileSystemWatcher::addFolder (const File& folder)
 
 void FileSystemWatcher::removeFolder (const File& folder)
 {
-    for (int i = 0; --i >= 0;)
+    for (int i = watched.size(); --i >= 0;)
     {
         if (watched[i]->folder == folder)
         {
