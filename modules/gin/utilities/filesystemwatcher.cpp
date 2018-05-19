@@ -6,6 +6,23 @@ For more information visit www.rabiensoftware.com
 ==============================================================================*/
 
 //==============================================================================
+#if JUCE_IOS
+class FileSystemWatcher::Impl
+{
+public:
+	Impl (FileSystemWatcher& o, File f) : owner (o), folder (f)
+	{
+	}
+	
+	~Impl()
+	{
+	}
+	
+	FileSystemWatcher& owner;
+	File folder;
+};
+#endif
+
 #if JUCE_MAC
 class FileSystemWatcher::Impl
 {
